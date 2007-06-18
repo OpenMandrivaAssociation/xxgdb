@@ -1,22 +1,23 @@
-%define	Summary	An X Window System graphical interface for the GNU gdb debugger
+%define name	xxgdb
+%define version	1.12
+%define release	%mkrel 25
 
-Name:		xxgdb
-Summary:	%{Summary}
-Version:	1.12
-Release:	24mdk
+Name:		%{name}
+Summary:	An X Window System graphical interface for the GNU gdb debugger
+Version:	%{version}
+Release:	%{release}
 License:	MIT
-Icon:		%{name}.xpm
 Group:		Development/Other
-BuildRequires:	XFree86-devel X11
+BuildRequires:	libx11-devel libxext-devel libxaw-devel libxmu-devel libxt-devel imake
 
 Source0:	ftp://sunsite.unc.edu/pub/Linux/devel/debuggers/%{name}-%{version}.tar.bz2
 Source1:	xxgdb.wmconfig
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
-Patch0:		xxgdb-1.08-glibc.patch.bz2
-Patch1:		xxgdb-1.12-sysv.patch.bz2
-Patch2:		xxgdb-1.12-compat21.patch.bz2
+Patch0:		xxgdb-1.08-glibc.patch
+Patch1:		xxgdb-1.12-sysv.patch
+Patch2:		xxgdb-1.12-compat21.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	gdb
 
@@ -49,40 +50,49 @@ install -m644 %{SOURCE1} -D $RPM_BUILD_ROOT%{_sysconfdir}/X11/wmconfig/xxgdb
 
 # icons
 install -m644 %{SOURCE11} -D $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
+install -m644 %{SOURCE11} -D $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 install -m644 %{SOURCE12} -D $RPM_BUILD_ROOT%{_iconsdir}/%{name}.png
+install -m644 %{SOURCE12} -D $RPM_BUILD_ROOT%{_iconsdir}/hicolor/32x32/apps/%{name}.png
 install -m644 %{SOURCE13} -D $RPM_BUILD_ROOT%{_liconsdir}/%{name}.png
+install -m644 %{SOURCE13} -D $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/%{name}.png
 
-# (fg) Menu entry
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-cat >$RPM_BUILD_ROOT%{_menudir}/%{name} <<EOF
-?package(%{name}):\
-	command="%{name}"\
-	needs="X11"\
-	icon="%{name}.png"\
-	section="Applications/Development/Tools"\
-	title="%{name}"\
-	longtitle="%{Summary}"
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop <<EOF
+[Desktop Entry]
+Encoding=UTF-8
+Name=Xxgdb
+Comment=Graphical interface to gdb debugger
+Exec=%{_bindir}/%{name} 
+Icon=%{name}
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Development;Debugger;
 EOF
 
-rm -f $RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/app-defaults
+rm -f $RPM_BUILD_ROOT%{_prefix}/lib/X11/app-defaults
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
 %update_menus
+%update_icon_cache hicolor
 
 %postun
 %clean_menus
+%clean_icon_cache hicolor
 
 %files
 %defattr(-,root,root)
-%{_prefix}/X11R6/bin/xxgdb
-%{_prefix}/X11R6/man/man1/xxgdb.1x*
-%{_prefix}/X11R6/lib/X11/doc/html/xxgdb.1.html
+%{_bindir}/%{name}
+%{_mandir}/man1/xxgdb.1x*
 %config(noreplace) %{_sysconfdir}/X11/app-defaults/XDbx
 %config(noreplace) %{_sysconfdir}/X11/wmconfig/xxgdb
-%{_menudir}/%{name}
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
+%{_datadir}/applications/mandriva-%{name}.desktop
+%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+%{_iconsdir}/hicolor/48x48/apps/%{name}.png
