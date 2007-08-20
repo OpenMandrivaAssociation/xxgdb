@@ -86,7 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %{_bindir}/%{name}
-%{_mandir}/man1/xxgdb.1x*
+%{_mandir}/man1/xxgdb.1*
 %config(noreplace) %{_sysconfdir}/X11/app-defaults/XDbx
 %config(noreplace) %{_sysconfdir}/X11/wmconfig/xxgdb
 %{_miconsdir}/%{name}.png
