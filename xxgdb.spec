@@ -18,7 +18,6 @@ Source13:	%{name}-48x48.png
 Patch0:		xxgdb-1.08-glibc.patch
 Patch1:		xxgdb-1.12-sysv.patch
 Patch2:		xxgdb-1.12-compat21.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	gdb
 
 %description
