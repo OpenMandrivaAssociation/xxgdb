@@ -1,11 +1,10 @@
 %define name	xxgdb
 %define version	1.12
-%define release	%mkrel 25
 
 Name:		%{name}
 Summary:	An X Window System graphical interface for the GNU gdb debugger
 Version:	%{version}
-Release:	%{release}
+Release:	%mkrel 26
 License:	MIT
 Group:		Development/Other
 BuildRequires:	libx11-devel libxext-devel libxaw-devel libxmu-devel libxt-devel imake
