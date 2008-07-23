@@ -4,7 +4,7 @@
 Name:		%{name}
 Summary:	An X Window System graphical interface for the GNU gdb debugger
 Version:	%{version}
-Release:	%mkrel 27
+Release:	%mkrel 28
 License:	MIT
 Group:		Development/Other
 BuildRequires:	libx11-devel libxext-devel libxaw-devel libxmu-devel libxt-devel imake
