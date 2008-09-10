@@ -1,14 +1,15 @@
-%define name	xxgdb
-%define version	1.12
-
-Name:		%{name}
+Name:		xxgdb
 Summary:	An X Window System graphical interface for the GNU gdb debugger
-Version:	%{version}
-Release:	%mkrel 28
+Version:	1.12
+Release:	%mkrel 26
 License:	MIT
 Group:		Development/Other
-BuildRequires:	libx11-devel libxext-devel libxaw-devel libxmu-devel libxt-devel imake
-
+BuildRequires:	libx11-devel
+BuildRequires:	libxext-devel
+BuildRequires:	libxaw-devel
+BuildRequires:	libxmu-devel
+BuildRequires:	libxt-devel
+BuildRequires:	imake
 Source0:	ftp://sunsite.unc.edu/pub/Linux/devel/debuggers/%{name}-%{version}.tar.bz2
 Source1:	xxgdb.wmconfig
 Source11:	%{name}-16x16.png
@@ -17,6 +18,11 @@ Source13:	%{name}-48x48.png
 Patch0:		xxgdb-1.08-glibc.patch
 Patch1:		xxgdb-1.12-sysv.patch
 Patch2:		xxgdb-1.12-compat21.patch
+# From Debian (008-unix98-ptys.dpatch): Support Unix98 PTYs - AdamW
+# 2008/09
+Patch3:		xxgdb-1.12-debian-pty.patch
+# From Debian: fix a build failure - AdamW 2008/09
+Patch4:		xxgdb-1.12-debian-filemenu.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	gdb
 
@@ -36,24 +42,23 @@ the GNU gdb debugger.  You'll also need to have the gdb package installed.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1 -b .compat21
+%patch3 -p1 -b .pty
+%patch4 -p1 -b .build
 
 %build
 xmkmf
-%make CDEBUGFLAGS="$RPM_OPT_FLAGS" CXXDEBUGFLAGS="$RPM_OPT_FLAGS"
+%make CDEBUGFLAGS="%{optflags}" CXXDEBUGFLAGS="%{optflags}"
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %{makeinstall_std} install.man
 
-install -m644 %{SOURCE1} -D $RPM_BUILD_ROOT%{_sysconfdir}/X11/wmconfig/xxgdb
+install -m644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/X11/wmconfig/xxgdb
 
 # icons
-install -m644 %{SOURCE11} -D $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
-install -m644 %{SOURCE11} -D $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/%{name}.png
-install -m644 %{SOURCE12} -D $RPM_BUILD_ROOT%{_iconsdir}/%{name}.png
-install -m644 %{SOURCE12} -D $RPM_BUILD_ROOT%{_iconsdir}/hicolor/32x32/apps/%{name}.png
-install -m644 %{SOURCE13} -D $RPM_BUILD_ROOT%{_liconsdir}/%{name}.png
-install -m644 %{SOURCE13} -D $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/%{name}.png
+install -m644 %{SOURCE11} -D %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+install -m644 %{SOURCE13} -D %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png
 
 mkdir -p %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop <<EOF
@@ -68,10 +73,10 @@ StartupNotify=true
 Categories=Development;Debugger;
 EOF
 
-rm -f $RPM_BUILD_ROOT%{_prefix}/lib/X11/app-defaults
+rm -f %{buildroot}%{_prefix}/lib/X11/app-defaults
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %if %mdkversion < 200900
 %post
@@ -91,9 +96,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/xxgdb.1*
 %config(noreplace) %{_sysconfdir}/X11/app-defaults/XDbx
 %config(noreplace) %{_sysconfdir}/X11/wmconfig/xxgdb
-%{_miconsdir}/%{name}.png
-%{_iconsdir}/%{name}.png
-%{_liconsdir}/%{name}.png
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_iconsdir}/hicolor/16x16/apps/%{name}.png
 %{_iconsdir}/hicolor/32x32/apps/%{name}.png
