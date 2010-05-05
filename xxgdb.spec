@@ -1,7 +1,7 @@
 Name:		xxgdb
 Summary:	An X Window System graphical interface for the GNU gdb debugger
 Version:	1.12
-Release:	%mkrel 28
+Release:	%mkrel 29
 License:	MIT
 Group:		Development/Other
 BuildRequires:	libx11-devel
@@ -16,7 +16,6 @@ Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
 Patch0:		xxgdb-1.08-glibc.patch
 Patch1:		xxgdb-1.12-sysv.patch
-Patch2:		xxgdb-1.12-compat21.patch
 # From Debian (008-unix98-ptys.dpatch): Support Unix98 PTYs - AdamW
 # 2008/09
 Patch3:		xxgdb-1.12-debian-pty.patch
@@ -42,7 +41,6 @@ the GNU gdb debugger.  You'll also need to have the gdb package installed.
 %setup -q -n %{name}-%{version}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1 -b .compat21
 %patch3 -p1 -b .pty
 %patch4 -p1 -b .build
 %patch5 -p1
