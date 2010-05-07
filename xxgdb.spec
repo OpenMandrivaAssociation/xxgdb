@@ -1,7 +1,7 @@
 Name:		xxgdb
 Summary:	An X Window System graphical interface for the GNU gdb debugger
 Version:	1.12
-Release:	%mkrel 29
+Release:	%mkrel 30
 License:	MIT
 Group:		Development/Other
 BuildRequires:	libx11-devel
