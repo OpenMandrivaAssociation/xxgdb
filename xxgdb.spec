@@ -99,3 +99,132 @@ rm -rf %{buildroot}
 %{_iconsdir}/hicolor/16x16/apps/%{name}.png
 %{_iconsdir}/hicolor/32x32/apps/%{name}.png
 %{_iconsdir}/hicolor/48x48/apps/%{name}.png
+
+
+%changelog
+* Wed Dec 08 2010 Oden Eriksson <oeriksson@mandriva.com> 1.12-31mdv2011.0
++ Revision: 615754
+- the mass rebuild of 2010.1 packages
+
+* Fri May 07 2010 Paulo Andrade <pcpa@mandriva.com.br> 1.12-30mdv2010.1
++ Revision: 543087
++ rebuild (emptylog)
+
+* Wed May 05 2010 Paulo Andrade <pcpa@mandriva.com.br> 1.12-29mdv2010.1
++ Revision: 542612
+- Make package functional again
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+* Sun Mar 29 2009 Funda Wang <fwang@mandriva.org> 1.12-26mdv2009.1
++ Revision: 362092
+- rediff filemenu patch
+
+* Wed Sep 10 2008 Adam Williamson <awilliamson@mandriva.org> 1.12-26mdv2009.0
++ Revision: 283425
+- drop legacy icons
+- s,$RPM_OPT_FLAGS,%%{optflags} and s,$RPM_BUILD_ROOT,%%{buildroot}
+- add debian-filemenu.patch from Debian (fixes a build issue)
+- add debian-pty.patch from Debian (adds support for Unix98 PTYs, #21825)
+- one buildrequires per line
+- drop unnecessary defines
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+    - rebuild
+    - kill re-definition of %%buildroot on Pixel's request
+    - kill desktop-file-validate's 'warning: key "Encoding" in group "Desktop Entry" is deprecated'
+    - fix man pages extension
+
+  + Pixel <pixel@mandriva.com>
+    - rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - rebuild
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+* Mon Jun 18 2007 Adam Williamson <awilliamson@mandriva.org> 1.12-25mdv2008.0
++ Revision: 40758
+- new X layout; XDG menu; fd.o icons; trim buildrequires; rebuild for new era
+- Import xxgdb
+
+
+
+* Sun Jan 01 2006 Mandriva Linux Team <http://www.mandrivaexpert.com/> 1.12-24mdk
+- Rebuild
+
+* Sat Dec 25 2004 Per Øyvind Karlsen <peroyvind@linux-mandrake.com> 1.12-23mdk
+- fix buildrequires
+
+* Mon Aug 16 2004 Laurent MONTEL <lmontel@mandrakesoft.com> 1.12-22mdk
+- Rebuild with new menu
+
+* Tue Jun 29 2004 Per Øyvind Karlsen <peroyvind@linux-mandrake.com> 1.12-21mdk
+- fix unpackaged files
+- cleanups
+
+* Sat Jul 12 2003 Per Øyvind Karlsen <peroyvind@sintrax.net> 1.12-20mdk
+- macroize
+- rm -rf $RPM_BUILD_ROOT at the beginning of %%install
+- rebuild
+- fix unpackaged files
+
+* Tue May 01 2001 David BAUDENS <baudens@mandrakesoft.com> 1.12-19mdk
+- Use %%_tmppath for BuildRoot
+- Use %%update_menus and %%clean_menus macros
+- Let spec_helper do its job (bzip2 man pages and strip binaries)
+
+* Thu Sep 14 2000 Florin Grad <florin@mandrakesoft.com> 1.12-18mdk
+- eliminating some more warnings from rpmlint
+- adding large icon and made all icons transparent
+
+* Wed Aug 30 2000 Florin Grad <florin@mandrakesoft.com> 1.12-17mdk
+- adding some macros
+
+* Tue Aug 08 2000 Frederic Lepied <flepied@mandrakesoft.com> 1.12-16mdk
+- automatically added BuildRequires
+
+* Wed Apr  5 2000 Denis Havlik <denis@mandrakesoft.com> 1.12-15mdk
+- group: Development/Other
+- menu + icons ( need beter ones!) 
+- spechelper
+
+* Wed Dec 1 1999 Florent Villard <warly@mandrakesoft.com>
+- built in new environment
+
+* Tue Oct 19 1999 - David BAUDENS <baudens@mandrakesoft.com>
+- Fix incorrect paths in patch #1 (xxgdb-1.12-sysv.patch.bz2)
+
+* Tue May 11 1999 Bernhard Rosenkraenzer <bero@mandrakesoft.com>
+- Mandrake adaptions
+- handle RPM_OPT_FLAGS
+
+* Wed Mar 23 1999 Michael Maher <mike@redhat.com>
+- added requires for gdb
+
+* Sun Mar 21 1999 Cristian Gafton <gafton@redhat.com> 
+- auto rebuild in the new build environment (release 9)
+
+* Sun Jan 17 1999 Jeff Johnson <jbj@redhat.com>
+- patch around i386 wchar_t glibc-2.1 typedef.
+
+* Wed Jul 29 1998 Jeff Johnson <jbj@redhat.com>
+- change wmconfig group to utilities
+- build root
+
+* Thu May 07 1998 Prospector System <bugs@redhat.com>
+- translations modified for de, fr, tr
+
+* Mon Feb  9 1998 Otto Hammersmith <otto@redhat.com>
+- fixed wmconfig entry
+
+* Tue Oct 21 1997 Otto Hammersmith <otto@redhat.com>
+- fixed src url
+- added wmconfig entries
+- removed prefix line ... can't have it with wmconfig file :(
+
+* Fri Aug 22 1997 Erik Troan <ewt@redhat.com>
+- built against glibc
