@@ -4,11 +4,11 @@ Version:	1.12
 Release:	%mkrel 31
 License:	MIT
 Group:		Development/Other
-BuildRequires:	libx11-devel
-BuildRequires:	libxext-devel
-BuildRequires:	libxaw-devel
-BuildRequires:	libxmu-devel
-BuildRequires:	libxt-devel
+BuildRequires:	pkgconfig(x11)
+BuildRequires:	pkgconfig(xext)
+BuildRequires:	pkgconfig(xaw7)
+BuildRequires:	pkgconfig(xmu)
+BuildRequires:	pkgconfig(xt)
 BuildRequires:	imake
 Source0:	ftp://sunsite.unc.edu/pub/Linux/devel/debuggers/%{name}-%{version}.tar.bz2
 Source11:	%{name}-16x16.png
