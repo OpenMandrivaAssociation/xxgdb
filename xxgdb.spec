@@ -1,7 +1,7 @@
 Name:		xxgdb
 Summary:	An X Window System graphical interface for the GNU gdb debugger
 Version:	1.12
-Release:	%mkrel 31
+Release:	32
 License:	MIT
 Group:		Development/Other
 BuildRequires:	pkgconfig(x11)
@@ -22,7 +22,6 @@ Patch3:		xxgdb-1.12-debian-pty.patch
 # From Debian: fix a build failure - AdamW 2008/09
 Patch4:		xxgdb-1.12-debian-filemenu.patch
 Patch5:		xxgdb-1.12-mandriva.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	gdb
 Requires:	xedit
 
